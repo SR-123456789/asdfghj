@@ -3,16 +3,16 @@ import { Item } from "../infrastructure/item.repository";
 
 
 export class ItemController {
-  constructor(private readonly itemAddUseCase: ItemAddUseCase) {}
+  constructor(private readonly itemAddUseCase: ItemAddUseCase) { }
 
   /**
    * 商品登録処理を実施するコントローラメソッド
    * @param name 登録する商品の名前
    * @returns 登録された Item オブジェクト
    */
-  registerItem(date:Date,name: string,cost:number,retail:number): Item {
-    const item = this.itemAddUseCase.execute(date,name,cost,retail);
+  registerItem(date: Date, name: string, cost: number, retail: number, rate: number): void {
+    this.itemAddUseCase.execute(date, name, cost, retail, rate);
     // console.log("Item registered:", item);
-    return item;
+    return;
   }
 }

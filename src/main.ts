@@ -6,6 +6,9 @@ import { parseDate, StringToArray } from "./functions/common";
 import { ItemRepository } from "./infrastructure/item.repository";
 import { ItemAddUseCase } from "./application/item/item-add.usecase";
 import { ItemController } from "./interfaces/item.controller";
+import { SaleRequestUseCase } from "./application/sale/sale.request.usecase";
+import { SaleController } from "./interfaces/sale.controller";
+import { SaleRepository } from "./infrastructure/sale.repository";
 
 function main(lines: string[]) {
 
@@ -18,7 +21,7 @@ function main(lines: string[]) {
     const REQUEST_SELLER = "request-sale:"
 
     //クエリ内入力順
-    const QUERY_KIND=0
+    const QUERY_KIND = 0
 
     // 依存性の手動注入
     const sellerRepository = new SellerRepository();
@@ -29,6 +32,12 @@ function main(lines: string[]) {
     const itemAddUseCase = new ItemAddUseCase(itemRepository);
     const itemController = new ItemController(itemAddUseCase);
 
+    const saleRepository = new SaleRepository();
+    const saleRequestUseCase = new SaleRequestUseCase(itemRepository,saleRepository);
+    const saleController = new SaleController(saleRequestUseCase,);
+
+
+    console.log("start!!!!!!!!")
     lines.forEach((v, i) => {
         if (i === 0) {
             rate = Number(v);
@@ -48,17 +57,17 @@ function main(lines: string[]) {
             queryNumber = Number(v);
             return;
         }
-        if (!queryNumber) return;
+        if (!queryNumber||!rate) return;
 
 
         const queryArray = StringToArray(v);
         // console.log(queryArray)
         if (queryArray[QUERY_KIND] === REGISTER_ITEM) {
-            itemController.registerItem(parseDate(queryArray[1].toString()), queryArray[2].toString(), Number(queryArray[3]), Number(queryArray[4]));
+            itemController.registerItem(parseDate(queryArray[1].toString()), queryArray[2].toString(), Number(queryArray[3]), Number(queryArray[4]),rate);
         }
 
         if (queryArray[QUERY_KIND] === REQUEST_SELLER) {
-            
+            saleController.requestSale(parseDate(queryArray[1].toString()), Number(queryArray[2]), Number(queryArray[3]), Number(queryArray[4]),rate);
         }
 
     });

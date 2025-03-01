@@ -2,6 +2,7 @@
 export interface Seller {
     id: number;
     name: string;
+    disabled?: boolean;
   }
   
   export class SellerRepository {
@@ -12,6 +13,7 @@ export interface Seller {
       const seller: Seller = {
         id: this.currentId++,
         name,
+        disabled: false,
       };
       this.sellers.push(seller);
       return seller;
