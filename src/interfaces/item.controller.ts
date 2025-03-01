@@ -1,0 +1,18 @@
+import { ItemAddUseCase } from "../application/item/item-add.usecase";
+import { Item } from "../infrastructure/item.repository";
+
+
+export class ItemController {
+  constructor(private readonly itemAddUseCase: ItemAddUseCase) {}
+
+  /**
+   * 商品登録処理を実施するコントローラメソッド
+   * @param name 登録する商品の名前
+   * @returns 登録された Item オブジェクト
+   */
+  registerItem(date:Date,name: string,cost:number,retail:number): Item {
+    const item = this.itemAddUseCase.execute(date,name,cost,retail);
+    // console.log("Item registered:", item);
+    return item;
+  }
+}

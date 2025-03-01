@@ -1,21 +1,12 @@
-// sellerController.ts
+import { SellerAddUseCase } from "../application/seller-add.usecase";
+import { Seller } from "../infrastructure/seller.repository";
 
-interface Seller {
-    id: number;
-    name: string;
-  }
-  
-  export class SellerController {
-    private sellers: Seller[] = [];
-    private currentId: number = 1;
-  
-    /**
-     * 新しいSellerを追加する。
-     * @param name - Sellerの名前
-     * @returns 追加されたSellerオブジェクト
-     */
-    addSeller(name: string) {
+export class SellerController {
+  constructor(private readonly sellerAddUseCase: SellerAddUseCase) {}
 
-    }
+  addSeller(name: string): Seller {
+    const seller = this.sellerAddUseCase.execute(name);
+    // console.log("Seller added:", seller);
+    return seller;
   }
-  
+}
