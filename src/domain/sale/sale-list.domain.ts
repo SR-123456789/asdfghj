@@ -5,7 +5,8 @@ export class SaleListDomain {
   constructor(private sales: SaleDomain[]) { }
 
   toNative(): Sale[] {
-    return this.sales.map(saleDomain => saleDomain.toNative()).filter(sale => sale !== null);
+    return this.sales.map(saleDomain => saleDomain.toNative())
+      .filter((sale): sale is Sale => sale !== null);
   }
 
   calculateNewRate(newPrice: number, newCost: number): number {
@@ -23,16 +24,27 @@ export class SaleListDomain {
   }
 
   getChangeDisabled(): SaleListDomain {
-    return new SaleListDomain(this.sales
-      .map(sale => {
-        const nativeSale = sale.toNative();
-        if (nativeSale === null) return null;
-        const disabledSale = { ...nativeSale, disabled: true };
-        return new SaleDomain(disabledSale);
-      })
-      .filter((sale) => sale !== null));
+    return new SaleListDomain(
+      this.sales
+        .map(sale => {
+          const nativeSale = sale.toNative();
+          if (nativeSale === null) return null;
+          const disabledSale: Sale = { ...nativeSale, disabled: true };
+          return new SaleDomain(disabledSale);
+        })
+        // 型ガードを使用して null を確実に除外する
+        .filter((sale): sale is SaleDomain => sale !== null)
+    );
   }
 
+
+  isEmpty(): boolean {
+    return (
+      !this.sales ||
+      this.sales.length === 0 ||
+      this.sales.every(item => item === null)
+    );
+  }
 
 
 }

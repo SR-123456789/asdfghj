@@ -1,5 +1,6 @@
 import { SaleListDomain } from "../domain/sale/sale-list.domain";
 import { SaleDomain } from "../domain/sale/sale.domain";
+import { isSameDay } from "../functions/common";
 
 export interface Sale {
     id: number;
@@ -76,6 +77,22 @@ export class SaleRepository {
         updatedNativeSales.forEach(updatedSale => {
             this.update(updatedSale);
         });
+    }
+
+    getInCompleteSalesByItemId(itemId: number,date:Date): SaleListDomain {
+        return new SaleListDomain(
+            this.sales
+                .filter(sale => sale.itemId === itemId&&!sale.isComplete&&!sale.disabled&&isSameDay(sale.createDate,date))
+                .map(sale => new SaleDomain(sale))
+        );
+    }
+
+    getCompleteSales(): SaleListDomain {
+        return new SaleListDomain(
+            this.sales
+                .filter(sale => sale.isComplete)
+                .map(sale => new SaleDomain(sale))
+        );
     }
 
 

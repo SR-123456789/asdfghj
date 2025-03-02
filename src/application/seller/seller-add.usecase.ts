@@ -1,4 +1,4 @@
-import { SellerRepository, Seller } from "../infrastructure/seller.repository";
+import { SellerRepository, Seller } from "../../infrastructure/seller.repository";
 
 export class SellerAddUseCase {
   constructor(private readonly sellerRepository: SellerRepository) {}

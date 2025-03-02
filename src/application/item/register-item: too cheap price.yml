@@ -1,0 +1,14 @@
+register-item: too cheap price
+register-item: 1
+request-sale: too cheap price
+request-sale: 1
+complete-sale: unauthorized operation
+request-sale: 2
+complete-sale: permission expired
+complete-sale: ok
+register-item: duplicated item
+register-item: 2
+request-sale: too expensive price
+request-sale: 3
+complete-sale: permission expired
+

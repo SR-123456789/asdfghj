@@ -1,3 +1,6 @@
+import { ItemListDomain } from "../domain/item/item-list.domain";
+import { ItemDomain } from "../domain/item/item.domain";
+
 export interface Item {
     id: number;
     name: string;
@@ -31,18 +34,19 @@ export class ItemRepository {
         return newItem;
     }
 
-    findItemByName(name: string): Item|undefined {
+    findItemByName(name: string): Item | undefined {
         return this.items.find(item => item.name === name);
     }
-    
+
 
     /**
      * 登録されている全商品を取得する。
      * @returns Item の配列
      */
-    getAllItems(): Item[] {
-        return this.items;
+    getAllItems(): ItemListDomain {
+        return new ItemListDomain(this.items.map(item => new ItemDomain(item)));
     }
+
 
     /**
      * 指定したIDの商品が存在するかを判定する。
@@ -53,12 +57,16 @@ export class ItemRepository {
         return this.items.some(item => item.id === id);
     }
 
-    getItemById(id: number): Item|undefined {
+    getItemById(id: number): Item | undefined {
         const item = this.items.find(item => item.id === id);
         if (item === undefined) {
             // console.log("hasItemByIdで存在チェックしてください")
             return undefined;
         }
         return this.items.find(item => item.id === id);
+    }
+
+    deleteItem(id: number): void {
+        this.items = this.items.filter(item => item.id !== id);
     }
 }

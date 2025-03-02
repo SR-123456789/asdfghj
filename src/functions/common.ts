@@ -15,4 +15,13 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
         date1.getDate() === date2.getDate()
     );
 }
+export const calculateProfitMargin = (totalPrice: number, totalCost: number): number => {
+    return totalPrice === 0
+        ? 0
+        : Math.round(((totalPrice - totalCost) / totalPrice) * 1000) / 1000;
+}
+
+export const roundToFourthDecimal = (value: number): number => {
+    return Math.round(value * 1000) / 1000;
+}
 
