@@ -4,12 +4,6 @@ import { SaleDomain } from "./sale.domain";
 export class SaleListDomain {
   constructor(private sales: SaleDomain[]) { }
 
-  /**
-   * 売上データを追加する。
-   * @param sale 追加する売上データ
-   * if(this.sales.length === 0) return 0; これ絶対忘れないように
-   */
-
   toNative(): Sale[] {
     return this.sales.map(saleDomain => saleDomain.toNative()).filter(sale => sale !== null);
   }

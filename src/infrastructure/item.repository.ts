@@ -14,6 +14,7 @@ export class ItemRepository {
      * 商品を登録し、登録された商品情報を返す。
      * @param date 登録日（または対象日）
      * @param name 登録する商品の名前
+     * @param date 登録日
      * @param cost 原価
      * @param retail 販売価格
      * @returns 登録された Item オブジェクト

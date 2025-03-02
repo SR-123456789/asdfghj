@@ -1,4 +1,3 @@
-// main.ts
 import { SellerRepository } from "./infrastructure/seller.repository";
 import { SellerAddUseCase } from "./application/seller-add.usecase";
 import { SellerController } from "./interfaces/seller.controller";
@@ -6,10 +5,10 @@ import { parseDate, StringToArray } from "./functions/common";
 import { ItemRepository } from "./infrastructure/item.repository";
 import { ItemAddUseCase } from "./application/item/item-add.usecase";
 import { ItemController } from "./interfaces/item.controller";
-import { SaleRequestUseCase } from "./application/sale/sale.request.usecase";
+import { SaleRequestUseCase } from "./application/sale/sale-request.usecase";
 import { SaleController } from "./interfaces/sale.controller";
 import { SaleRepository } from "./infrastructure/sale.repository";
-import { SaleCompleteUseCase } from "./application/sale/sale.complete.usecase";
+import { SaleCompleteUseCase } from "./application/sale/sale-complete.usecase";
 
 function main(lines: string[]) {
 
@@ -40,7 +39,7 @@ function main(lines: string[]) {
     const saleController = new SaleController(saleRequestUseCase,saleCompleteUseCase);
 
 
-    console.log("start!!!!!!!!")
+    // console.log("start!!!!!!!!")
     lines.forEach((v, i) => {
         if (i === 0) {
             rate = Number(v);

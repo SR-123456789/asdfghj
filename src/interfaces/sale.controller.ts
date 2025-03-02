@@ -1,5 +1,5 @@
-import { SaleCompleteUseCase } from "../application/sale/sale.complete.usecase";
-import { SaleRequest, SaleRequestUseCase } from "../application/sale/sale.request.usecase";
+import { SaleCompleteUseCase } from "../application/sale/sale-complete.usecase";
+import { SaleRequest, SaleRequestUseCase } from "../application/sale/sale-request.usecase";
 
 export class SaleController {
     constructor(

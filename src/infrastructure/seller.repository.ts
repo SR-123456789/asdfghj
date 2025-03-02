@@ -1,4 +1,3 @@
-// infrastructure/seller.repository.ts
 export interface Seller {
     id: number;
     name: string;

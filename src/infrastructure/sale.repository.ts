@@ -1,4 +1,4 @@
-import { SaleListDomain } from "../domain/sale/sale-array";
+import { SaleListDomain } from "../domain/sale/sale-list.domain";
 import { SaleDomain } from "../domain/sale/sale.domain";
 
 export interface Sale {
@@ -19,12 +19,13 @@ export class SaleRepository {
 
     /**
      * 売上を登録し、登録された売上情報を返す。
-     * @param sellerId 売り手のID
-     * @param itemId 商品のID
-     * @param place 場所の情報（例: 店舗番号など）
-     * @param cost コスト
-     * @returns 登録された Sale オブジェクト
-     */
+    * @param sellerId 売り手のID。売上を担当する担当者や店舗を識別するためのIDです。
+    * @param itemId 商品のID。売上対象となる商品の識別子です。
+    * @param price 売上の価格。実際に販売された商品の価格を示します。
+    * @param cost コスト。商品の原価や販売に関連する費用を示します。
+    * @param createDate 売上の作成日時。売上が記録された日時を指定します。
+    * @returns 登録された Sale オブジェクト。自動採番されたIDおよび提供されたパラメーターが設定されたオブジェクトを返します。
+    */
     addSale(sellerId: number, itemId: number, price: number, cost: number, createDate: Date): Sale {
         const newSale: Sale = {
             id: this.currentId++,

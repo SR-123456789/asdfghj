@@ -2,7 +2,6 @@ import { ItemRepository } from "../../infrastructure/item.repository";
 import { SaleRepository } from "../../infrastructure/sale.repository";
 
 export interface SaleRequest {
-    // 売上のリクエスト情報（必要に応じて項目を追加してください）
     saleDate: Date;
     itemId: number;
     quantity: number;
@@ -16,10 +15,7 @@ export class SaleRequestUseCase {
     ) { }
 
     /**
-     * 売上リクエストの処理を実施する。
-     * ※実際はここでレポジトリーにアクセスするなどの処理を行いますが、現時点ではリクエストをそのまま返します。
-     * @param request 売上リクエスト情報
-     * @returns 処理結果（今回は入力値そのまま）
+     * リクエストの処理を実施する。
      */
 
     execute(date: Date, sellerId: number, itemId: number, price: number, rate: number): void {

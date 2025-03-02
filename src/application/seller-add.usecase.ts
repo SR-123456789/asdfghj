@@ -1,4 +1,3 @@
-// application/seller-add.usecase.ts
 import { SellerRepository, Seller } from "../infrastructure/seller.repository";
 
 export class SellerAddUseCase {
