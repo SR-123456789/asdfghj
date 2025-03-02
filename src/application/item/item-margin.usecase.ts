@@ -25,7 +25,7 @@ export class ItemMarginUseCase {
     const result = this.calculateProfitMargins(itemListDomain.toNative(), this.saleRepository.getCompleteSales().toNative());
     console.log(`get-margin-items: ${result.length}`)
     result.forEach((v) => {
-      console.log(`${v.itemId} ${v.name} ${v.profitMargin}`)
+      console.log(`${v.itemId} ${v.name} ${roundToFourthDecimal(v.profitMargin)}`)
     })
   }
 
@@ -43,7 +43,7 @@ export class ItemMarginUseCase {
         // 売上の合計価格と合計コストを計算
         const totalPrice = itemSales.reduce((sum, sale) => sum + sale.price, 0);
         const totalCost = itemSales.reduce((sum, sale) => sum + sale.cost, 0);
-        profitMargin = roundToFourthDecimal(calculateProfitMargin(totalPrice, totalCost));
+        profitMargin = calculateProfitMargin(totalPrice, totalCost);
       }
 
       return { itemId: item.id, profitMargin, name: item.name };

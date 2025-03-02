@@ -13,7 +13,7 @@ export class SellerController {
     // console.log("Seller added:", seller);
     return seller;
   }
-  getSortedMarginSellers(): void {
+  getSortedMarginSellers(date:Date): void {
     this.sellerMarginUseCase.execute();
     return;
   }

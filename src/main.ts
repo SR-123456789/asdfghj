@@ -25,7 +25,7 @@ function main(lines: string[]) {
     const COMPLETE_SALE = "complete-sale:"
     const DELETE_ITEM = "delete-item:"
     const GET_MARGIN_ITEM="get-margin-items:"
-    const GET_MARGIN_SELLER="get-margin-sales:"
+    const GET_MARGIN_SELLERS="get-margin-sellers:"
 
 
     //クエリ内入力順
@@ -99,8 +99,8 @@ function main(lines: string[]) {
             return
         }
 
-        if (queryArray[QUERY_KIND] === GET_MARGIN_SELLER) {
-            itemController.getSortedMarginItems(parseDate(queryArray[1].toString()));
+        if (queryArray[QUERY_KIND] === GET_MARGIN_SELLERS) {
+            sellerController.getSortedMarginSellers(parseDate(queryArray[1].toString()));
             return
         }
     });

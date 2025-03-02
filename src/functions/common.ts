@@ -21,7 +21,9 @@ export const calculateProfitMargin = (totalPrice: number, totalCost: number): nu
         : Math.round(((totalPrice - totalCost) / totalPrice) * 1000) / 1000;
 }
 
-export const roundToFourthDecimal = (value: number): number => {
-    return Math.round(value * 1000) / 1000;
-}
+export const roundToFourthDecimal = (value: number): string => {
+    const rounded = Math.round(value * 1000) / 1000;
+    return rounded.toFixed(3); // 少数第三位まで表示
+};
+
 
