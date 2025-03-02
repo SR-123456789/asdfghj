@@ -56,7 +56,7 @@ export class ItemRepository {
     getItemById(id: number): Item|undefined {
         const item = this.items.find(item => item.id === id);
         if (item === undefined) {
-            console.log("hasItemByIdで存在チェックしてください")
+            // console.log("hasItemByIdで存在チェックしてください")
             return undefined;
         }
         return this.items.find(item => item.id === id);
