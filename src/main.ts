@@ -9,6 +9,7 @@ import { ItemController } from "./interfaces/item.controller";
 import { SaleRequestUseCase } from "./application/sale/sale.request.usecase";
 import { SaleController } from "./interfaces/sale.controller";
 import { SaleRepository } from "./infrastructure/sale.repository";
+import { SaleCompleteUseCase } from "./application/sale/sale.complete.usecase";
 
 function main(lines: string[]) {
 
@@ -19,6 +20,7 @@ function main(lines: string[]) {
     //クエリ名
     const REGISTER_ITEM = "register-item:"
     const REQUEST_SELLER = "request-sale:"
+    const COMPLETE_SALE = "complete-sale:"
 
     //クエリ内入力順
     const QUERY_KIND = 0
@@ -34,7 +36,8 @@ function main(lines: string[]) {
 
     const saleRepository = new SaleRepository();
     const saleRequestUseCase = new SaleRequestUseCase(itemRepository,saleRepository);
-    const saleController = new SaleController(saleRequestUseCase,);
+    const saleCompleteUseCase = new SaleCompleteUseCase(saleRepository);
+    const saleController = new SaleController(saleRequestUseCase,saleCompleteUseCase);
 
 
     console.log("start!!!!!!!!")
@@ -68,6 +71,10 @@ function main(lines: string[]) {
 
         if (queryArray[QUERY_KIND] === REQUEST_SELLER) {
             saleController.requestSale(parseDate(queryArray[1].toString()), Number(queryArray[2]), Number(queryArray[3]), Number(queryArray[4]),rate);
+        }
+
+        if (queryArray[QUERY_KIND] === COMPLETE_SALE) {
+            saleController.completeSale(parseDate(queryArray[1].toString()), Number(queryArray[2]), Number(queryArray[3]));
         }
 
     });

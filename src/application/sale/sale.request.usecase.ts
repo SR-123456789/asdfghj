@@ -24,6 +24,11 @@ export class SaleRequestUseCase {
 
     execute(date: Date, sellerId: number, itemId: number, price: number, rate: number): void {
 
+
+        const allSellersSellList= this.saleRepository.getSalesBySellerId(sellerId);
+        const disableChangeSellList = allSellersSellList.getIncompleteSales().getChangeDisabled();
+        this.saleRepository.updateFromSaleList(disableChangeSellList);
+
         const item = this.itemRepository.getItemById(itemId);
         if (item === undefined) {
             console.log("request-sale: no such item");
@@ -40,6 +45,9 @@ export class SaleRequestUseCase {
 
     private canSellItem(price: number, cost: number, retail: number, itemId: number, sellerId: number, rate: number): boolean {
 
+        const saleListBySailer = this.saleRepository.getSalesBySellerId(sellerId);
+
+
         if (price > retail) {
             console.log("request-sale: too expensive price");
             return false;
@@ -49,8 +57,7 @@ export class SaleRequestUseCase {
             return true;
         }
 
-        const itemSaleListByItem = this.saleRepository.getSalesByItemId(itemId);
-        const saleListBySailer = this.saleRepository.getSalesBySellerId(sellerId);
+        const itemSaleListByItem = this.saleRepository.getCompleteSalesByItemId(itemId);
         // console.log(price > cost, itemSaleListByItem.calculateNewRate(price, cost) > rate, saleListBySailer.calculateNewRate(price, cost) > rate)
         if (price > cost && itemSaleListByItem.calculateNewRate(price, cost) > rate && saleListBySailer.calculateNewRate(price, cost) > rate) {
             return true;
